@@ -1,9 +1,19 @@
+/* ---------------------------------------------------- */
+/* TABLE OF CONTENTS: --------------------------------- */
+/* --------------------------------------1. ALL STYLING */
+/* -------------------------------------2. BODY STYLING */
+/* ------------------------------------3. MEDIA QUERIES */
+/* ---------------------------------------------------- */
+
+/* 1. ALL STYLING-------------------------------------- */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
+/* END ALL STYLING SECTION----------------------------- */
 
+/* 2. BODY STYLING------------------------------------- */
 html,
 body,
 .wrapper {
@@ -117,7 +127,10 @@ button[disabled] {
   resize: none;
   overflow: hidden;
 }
+/* END BODY STYLING SECTION---------------------------- */
 
+/* 3. MEDIA QUERIES------------------------------------ */
+/* for screens smaller than 690px */
 @media (max-width: 690px) {
   .btn {
     font-size: 1rem;
@@ -130,8 +143,10 @@ button[disabled] {
   }
 }
 
+/* for screens smaller than 500px */
 @media (max-width: 500px) {
   .btn {
     font-size: 0.8rem;
   }
 }
+/* END MEDIA QUERY SECTION----------------------------- */
