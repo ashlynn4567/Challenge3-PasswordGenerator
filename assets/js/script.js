@@ -26,6 +26,7 @@ var characterSet = [
 // defining passwordSpecs object to hold user input values
 var passwordSpecs = {};
 
+// function to display an error message if the user doesn't answer yes to at least one character type
 function errorMessage(value, prompt) {
   while (value === "" || value === null) {
     window.alert("You need to provide a valid answer! Please try again.");
@@ -93,14 +94,12 @@ function getPasswordType() {
 // function asking user to input number of characters 
 function getPasswordNumChars() {
   // how many characters? (8 to 128)
-  passwordSpecs.numChars = prompt("How many characters do you need in your password? Enter a number from 8 to 128.");
+  var numCharsPrompt = "How many characters do you need in your password? Enter a number from 8 to 128.";
+  passwordSpecs.numChars = prompt(numCharsPrompt);
   passwordSpecs.numChars = parseInt(passwordSpecs.numChars);
   console.log(passwordSpecs.numChars);
 
-  while (passwordSpecs.numChars === "" || passwordSpecs.numChars === null) {
-    window.alert("You need to provide a valid answer! Please try again.");
-    passwordSpecs.numChars = prompt("How many characters do you need in your password? Enter a number from 8 to 128.");
-  };
+  errorMessage(passwordSpecs.numChars, numCharsPrompt);
 };
 
 // run all password specification functions
