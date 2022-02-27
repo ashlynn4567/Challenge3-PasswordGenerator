@@ -29,22 +29,11 @@ var characterSet = [
 // 2. GETTING USER INPUT AND STORING IT AS A VARIABLE------------------------------------------------------------------- //
 // function to display an error message if the user doesn't answer yes to at least one character type
 function errorMessage(value, prompt) {
-  console.log(value === "");
-  console.log(value === null);
-  console.log(value === NaN);
   while (value === "" || value === null) {
     window.alert("You need to provide a valid answer! Please try again.");
     value = window.prompt(prompt);
   };
 };
-
-// // function to display an error message if the user doesn't enter a number from 8 to 128 for numChars
-// function errorMessageNumChars(value, prompt) {
-//   while (8 >= value <= 128) {
-//   window.alert("You must enter a number from 8 to 128! Please try again.");
-//   value = window.prompt(prompt);
-//   };
-// };
 
 // function asking user to input different types of character specifications
 function getPasswordType() {
@@ -55,46 +44,46 @@ function getPasswordType() {
     // lowercase? (yes or no)
     var lowerCaseLettersPrompt = "Would you like to include lowercase letters? Type Y for YES or N for NO.";
     passwordSpecs.lower = prompt(lowerCaseLettersPrompt);
-    console.log(passwordSpecs.lower);
 
     if (passwordSpecs.lower == "Y" || passwordSpecs.lower == "y") {
       oneType = true;
     };
    
     errorMessage(passwordSpecs.lower, lowerCaseLettersPrompt);
+    console.log(passwordSpecs.lower);
 
     // uppercase? (yes or no)
     var upperCaseLettersPrompt = "Would you like to include uppercase letters? Type Y for YES or N for NO.";
     passwordSpecs.upper = prompt(upperCaseLettersPrompt);
-    console.log(passwordSpecs.upper);
 
     if (passwordSpecs.upper == "y" || passwordSpecs.upper == "y") {
       oneType = true;
     };
     
     errorMessage(passwordSpecs.upper, upperCaseLettersPrompt);
+    console.log(passwordSpecs.upper);
 
     // numbers? (yes or no)
     var numbersPrompt = "Would you like to include numerical characters? Type Y for YES or N for NO.";
     passwordSpecs.number = prompt(numbersPrompt);
-    console.log(passwordSpecs.number);
 
     if (passwordSpecs.number == "y" || passwordSpecs.number == "y") {
       oneType = true;
     };
     
     errorMessage(passwordSpecs.number, numbersPrompt);
-
+    console.log(passwordSpecs.number);
+    
     // special characters? (yes or no)
     var specialPrompt = "Would you like to include special characters? Type Y for YES or N for NO.";
     passwordSpecs.special = prompt(specialPrompt);
-    console.log(passwordSpecs.special);
 
     if (passwordSpecs.special == "y" || passwordSpecs.special == "y") {
       oneType = true;
     };
     
     errorMessage(passwordSpecs.special, specialPrompt);
+    console.log(passwordSpecs.special);
 
     // alert user to enter at least one Y value if they haven't already done so
     if (oneType === false) {
@@ -108,7 +97,6 @@ function getPasswordNumChars() {
   // how many characters? (8 to 128)
   var numCharsPrompt = "How many characters do you need in your password? Enter a number from 8 to 128.";
   passwordSpecs.numChars = parseInt(prompt(numCharsPrompt));
-  console.log(passwordSpecs.numChars);
 
   // make sure user didn't enter a string 
   if (isNaN(passwordSpecs.numChars)) {
@@ -117,7 +105,13 @@ function getPasswordNumChars() {
   };
 
   errorMessage(passwordSpecs.numChars, numCharsPrompt);
-  // errorMessageNumChars(passwordSpecs.numChars, numCharsPrompt); *****test after fixing errormessage bug******************
+  
+  // while loop to display an error message if the user doesn't enter a number from 8 to 128 for numChars
+  while (passwordSpecs.numChars < 8 && passwordSpecs.numChars > 128) {
+    window.alert("You must enter a number from 8 to 128! Please try again.");
+    passwordSpecs.numChars = parseInt(window.prompt(numCharsPrompt));
+    };
+
   console.log(passwordSpecs.numChars);
 };
 
