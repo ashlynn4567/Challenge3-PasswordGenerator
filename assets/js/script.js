@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------------------------- //
 // TABLE OF CONTENTS: -------------------------------------------------------------------------------------------------- //
-// ---------------------------------------------------------------------------------------------------------1. VARIABLES //
+// ------------------------------------------------------------------------------------------------1. DEFINING VARIABLES //
 // ----------------------------------------------------------2. GETTING INPUT FROM THE USER AND STORING IT AS A VARIABLE //
 // -----------------------------------------------------3. RANDOMLY GENERATING A PASSWORD CHARACTERS BASED ON USER INPUT //
 // ------------------------------------------------------------------------4. WRITING PASSWORD ON THE PAGE FOR USER VIEW //
@@ -9,7 +9,8 @@
 
 
 
-// 1. VARIABLES--------------------------------------------------------------------------------------------------------- //
+
+// 1. DEFINING VARIABLES------------------------------------------------------------------------------------------------ //
 // defining passwordType object to hold user input values for password type
 var passwordType = {};
 
@@ -104,15 +105,14 @@ function getPasswordNumChars() {
     window.alert("You need to provide a valid answer! Please try again.");
     passwordNumChars = parseInt(prompt(numCharsPrompt));
   };
-
-  errorMessage(passwordNumChars, numCharsPrompt);
   
   // while loop to display an error message if the user doesn't enter a number from 8 to 128 for numChars
   while (passwordNumChars < 8 && passwordNumChars > 128) {
     window.alert("You must enter a number from 8 to 128! Please try again.");
     passwordNumChars = parseInt(window.prompt(numCharsPrompt));
-    };
+  };
 
+  errorMessage(passwordNumChars, numCharsPrompt);
   console.log(passwordNumChars);
 };
 
@@ -132,10 +132,13 @@ function getPasswordSpecs() {
 
 // 3. RANDOMLY GENERATING A PASSWORD CHARACTERS BASED ON USER INPUT----------------------------------------------------- //
 //take into account which character types were selected
-function includePasswordType() {
-  if (oneType) {
-    // include that property into array consideration
-  };  
+function includePasswordType() {  
+  for (i = 0; i < (passwordType.length + 1); i++) {
+    console.log("This is iteration #" + [i]);
+    // if (oneType) {
+    //   // include that property into array consideration
+    // };
+  };
 };
 
 //use math.random to generate password
@@ -145,6 +148,7 @@ function selectRandomCharacters () {
   };
 };
 
+// run all password generation functions
 function generatePassword() {
   includePasswordType();
   selectRandomCharacters();
