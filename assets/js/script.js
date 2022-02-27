@@ -10,16 +10,25 @@
 
 
 // 1. VARIABLES--------------------------------------------------------------------------------------------------------- //
-// defining passwordSpecs object to hold user input values
-var passwordSpecs = {};
+// defining passwordType object to hold user input values for password type
+var passwordType = {};
+
+// defining passwordNumChars object to hold user input values for number of characters
+var passwordNumChars = {};
+
+// set a variable to track if the user has entered yes to at least one character type
+var oneType = false;
+
+// assign an empty variable to add random characters to 
+var newPassword = ""
 
 // Nested array for possible password characters
 var characterSet = [  
-  "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", 
-  "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", 
-  "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", 
-  " ", "!", '"', "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "\\", "]", 
-  "^", "_", "`", "{", "|", "}", "~"
+  ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"], 
+  ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"], 
+  ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"], 
+  [" ", "!", '"', "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "\\", "]", 
+  "^", "_", "`", "{", "|", "}", "~"]
 ];
 // END VARIABLE SECTION------------------------------------------------------------------------------------------------- //
 
@@ -27,6 +36,13 @@ var characterSet = [
 
 
 // 2. GETTING USER INPUT AND STORING IT AS A VARIABLE------------------------------------------------------------------- //
+// function to test whether that character type should be included into password generation
+function includeCharacterType(value) {
+  if (value == "Y" || value == "y") {
+    oneType = true;
+  };
+};
+
 // function to display an error message if the user doesn't answer yes to at least one character type
 function errorMessage(value, prompt) {
   while (value === "" || value === null) {
@@ -37,53 +53,38 @@ function errorMessage(value, prompt) {
 
 // function asking user to input different types of character specifications
 function getPasswordType() {
-  // set a variable to track if the user has entered yes to at least one character type
-  var oneType = false;
-
   while (oneType === false) {
     // lowercase? (yes or no)
     var lowerCaseLettersPrompt = "Would you like to include lowercase letters? Type Y for YES or N for NO.";
-    passwordSpecs.lower = prompt(lowerCaseLettersPrompt);
+    passwordType.lower = prompt(lowerCaseLettersPrompt);
 
-    if (passwordSpecs.lower == "Y" || passwordSpecs.lower == "y") {
-      oneType = true;
-    };
-   
-    errorMessage(passwordSpecs.lower, lowerCaseLettersPrompt);
-    console.log(passwordSpecs.lower);
+    includeCharacterType(passwordType.lower);
+    errorMessage(passwordType.lower, lowerCaseLettersPrompt);
+    console.log(passwordType.lower);
 
     // uppercase? (yes or no)
     var upperCaseLettersPrompt = "Would you like to include uppercase letters? Type Y for YES or N for NO.";
-    passwordSpecs.upper = prompt(upperCaseLettersPrompt);
+    passwordType.upper = prompt(upperCaseLettersPrompt);
 
-    if (passwordSpecs.upper == "y" || passwordSpecs.upper == "y") {
-      oneType = true;
-    };
-    
-    errorMessage(passwordSpecs.upper, upperCaseLettersPrompt);
-    console.log(passwordSpecs.upper);
+    includeCharacterType(passwordType.upper);
+    errorMessage(passwordType.upper, upperCaseLettersPrompt);
+    console.log(passwordType.upper);
 
     // numbers? (yes or no)
     var numbersPrompt = "Would you like to include numerical characters? Type Y for YES or N for NO.";
-    passwordSpecs.number = prompt(numbersPrompt);
+    passwordType.number = prompt(numbersPrompt);
 
-    if (passwordSpecs.number == "y" || passwordSpecs.number == "y") {
-      oneType = true;
-    };
-    
-    errorMessage(passwordSpecs.number, numbersPrompt);
-    console.log(passwordSpecs.number);
+    includeCharacterType(passwordType.number);
+    errorMessage(passwordType.number, numbersPrompt);
+    console.log(passwordType.number);
     
     // special characters? (yes or no)
     var specialPrompt = "Would you like to include special characters? Type Y for YES or N for NO.";
-    passwordSpecs.special = prompt(specialPrompt);
+    passwordType.special = prompt(specialPrompt);
 
-    if (passwordSpecs.special == "y" || passwordSpecs.special == "y") {
-      oneType = true;
-    };
-    
-    errorMessage(passwordSpecs.special, specialPrompt);
-    console.log(passwordSpecs.special);
+    includeCharacterType(passwordType.special);
+    errorMessage(passwordType.special, specialPrompt);
+    console.log(passwordType.special);
 
     // alert user to enter at least one Y value if they haven't already done so
     if (oneType === false) {
@@ -96,30 +97,31 @@ function getPasswordType() {
 function getPasswordNumChars() {
   // how many characters? (8 to 128)
   var numCharsPrompt = "How many characters do you need in your password? Enter a number from 8 to 128.";
-  passwordSpecs.numChars = parseInt(prompt(numCharsPrompt));
+  passwordNumChars = parseInt(prompt(numCharsPrompt));
 
   // make sure user didn't enter a string 
-  if (isNaN(passwordSpecs.numChars)) {
+  if (isNaN(passwordNumChars)) {
     window.alert("You need to provide a valid answer! Please try again.");
-    passwordSpecs.numChars = parseInt(prompt(numCharsPrompt));
+    passwordNumChars = parseInt(prompt(numCharsPrompt));
   };
 
-  errorMessage(passwordSpecs.numChars, numCharsPrompt);
+  errorMessage(passwordNumChars, numCharsPrompt);
   
   // while loop to display an error message if the user doesn't enter a number from 8 to 128 for numChars
-  while (passwordSpecs.numChars < 8 && passwordSpecs.numChars > 128) {
+  while (passwordNumChars < 8 && passwordNumChars > 128) {
     window.alert("You must enter a number from 8 to 128! Please try again.");
-    passwordSpecs.numChars = parseInt(window.prompt(numCharsPrompt));
+    passwordNumChars = parseInt(window.prompt(numCharsPrompt));
     };
 
-  console.log(passwordSpecs.numChars);
+  console.log(passwordNumChars);
 };
 
 // run all password specification functions
 function getPasswordSpecs() {
   getPasswordType();
   getPasswordNumChars();
-  console.log(passwordSpecs);
+  console.log(passwordType);
+  console.log(passwordNumChars);
 
   generatePassword();
 };
@@ -129,11 +131,23 @@ function getPasswordSpecs() {
 
 
 // 3. RANDOMLY GENERATING A PASSWORD CHARACTERS BASED ON USER INPUT----------------------------------------------------- //
-// use math.random to generate password
-function generatePassword() {
-  for (i=0; i < passwordSpecs.numChars; i++) {
+//take into account which character types were selected
+function includePasswordType() {
+  if (oneType) {
+    // include that property into array consideration
+  };  
+};
 
+//use math.random to generate password
+function selectRandomCharacters () {
+  // until the number of characters = user input number of characters, add a randomly generated character
+  for (i=0; i < passwordNumChars; i++) {
   };
+};
+
+function generatePassword() {
+  includePasswordType();
+  selectRandomCharacters();
 };
 // END PASSWORD GENERATION SECTION-------------------------------------------------------------------------------------- //
 
