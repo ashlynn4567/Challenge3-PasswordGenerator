@@ -126,6 +126,8 @@ function getPasswordSpecs() {
   getPasswordType();
   getPasswordNumChars();
   console.log(passwordSpecs);
+
+  generatePassword();
 };
 // END USER INPUT SECTION----------------------------------------------------------------------------------------------- //
 
@@ -135,6 +137,9 @@ function getPasswordSpecs() {
 // 3. RANDOMLY GENERATING A PASSWORD CHARACTERS BASED ON USER INPUT----------------------------------------------------- //
 // use math.random to generate password
 function generatePassword() {
+  for (i=0; i < passwordSpecs.numChars; i++) {
+
+  };
 };
 // END PASSWORD GENERATION SECTION-------------------------------------------------------------------------------------- //
 
