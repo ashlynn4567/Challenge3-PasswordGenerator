@@ -10,12 +10,16 @@
 
 
 // 1. VARIABLES--------------------------------------------------------------------------------------------------------- //
+// defining passwordSpecs object to hold user input values
+var passwordSpecs = {};
+
 // Nested array for possible password characters
 var characterSet = [  
-  ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
-  ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
-  ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
-  [" ", "!", '"', "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "\\", "]", "^", "_", "`", "{", "|", "}", "~"]
+  "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", 
+  "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", 
+  "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", 
+  " ", "!", '"', "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "\\", "]", 
+  "^", "_", "`", "{", "|", "}", "~"
 ];
 // END VARIABLE SECTION------------------------------------------------------------------------------------------------- //
 
@@ -23,16 +27,24 @@ var characterSet = [
 
 
 // 2. GETTING USER INPUT AND STORING IT AS A VARIABLE------------------------------------------------------------------- //
-// defining passwordSpecs object to hold user input values
-var passwordSpecs = {};
-
 // function to display an error message if the user doesn't answer yes to at least one character type
 function errorMessage(value, prompt) {
+  console.log(value === "");
+  console.log(value === null);
+  console.log(value === NaN);
   while (value === "" || value === null) {
     window.alert("You need to provide a valid answer! Please try again.");
     value = window.prompt(prompt);
   };
 };
+
+// // function to display an error message if the user doesn't enter a number from 8 to 128 for numChars
+// function errorMessageNumChars(value, prompt) {
+//   while (8 >= value <= 128) {
+//   window.alert("You must enter a number from 8 to 128! Please try again.");
+//   value = window.prompt(prompt);
+//   };
+// };
 
 // function asking user to input different types of character specifications
 function getPasswordType() {
@@ -95,11 +107,18 @@ function getPasswordType() {
 function getPasswordNumChars() {
   // how many characters? (8 to 128)
   var numCharsPrompt = "How many characters do you need in your password? Enter a number from 8 to 128.";
-  passwordSpecs.numChars = prompt(numCharsPrompt);
-  passwordSpecs.numChars = parseInt(passwordSpecs.numChars);
+  passwordSpecs.numChars = parseInt(prompt(numCharsPrompt));
   console.log(passwordSpecs.numChars);
 
+  // make sure user didn't enter a string 
+  if (isNaN(passwordSpecs.numChars)) {
+    window.alert("You need to provide a valid answer! Please try again.");
+    passwordSpecs.numChars = parseInt(prompt(numCharsPrompt));
+  };
+
   errorMessage(passwordSpecs.numChars, numCharsPrompt);
+  // errorMessageNumChars(passwordSpecs.numChars, numCharsPrompt); *****test after fixing errormessage bug******************
+  console.log(passwordSpecs.numChars);
 };
 
 // run all password specification functions
@@ -116,7 +135,6 @@ function getPasswordSpecs() {
 // 3. RANDOMLY GENERATING A PASSWORD CHARACTERS BASED ON USER INPUT----------------------------------------------------- //
 // use math.random to generate password
 function generatePassword() {
-  
 };
 // END PASSWORD GENERATION SECTION-------------------------------------------------------------------------------------- //
 
@@ -142,23 +160,3 @@ var generateBtn = document.querySelector("#generate");
 // Add event listener to generate button
 generateBtn.addEventListener("click", getPasswordSpecs);
 // END CLICK EVENT LISTENER SECTION------------------------------------------------------------------------------------- //
-
-
-
-
-
-
-/* QUESTIONS:
-
-1. How do I determine a good logical order for my layout of functions throughout my codebase?
-    a: scoping. but i don't understand this quite yet. 
-2. I made separate functions in passwordSpecs: 
-      - one for getPasswordNumChars 
-      - and another for getPasswordType. 
-    I did this because the functions needed to be separated for form validation reasons (i think).
-    Is this bad because they are nested in each other? Logically it makes sense to me but I don't 
-    want the codebase to be difficult to read/edit later. 
-3. Can you explain the difference between return and break? Once I set up form validation with a 
-    conditional, I don't understand how to make the code repeat like I want it to. 
-
-*/
