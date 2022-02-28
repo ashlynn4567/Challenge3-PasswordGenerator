@@ -16,8 +16,10 @@ These were just a few of the complications that were overcome during the buildin
 
 This is how the main page appears to users. The page is responsive, adapting to multiple screen sizes.
 
-<center><img src="./assets/images/desktop-password-gen.png"/></center>
-<center><img src="./assets/images/mobile-password-gen.png"></center>
+<p align="center">
+<img src="./assets/images/desktop-password-gen.png"/>
+<img src="./assets/images/mobile-password-gen.png">
+</p>
 
 Once the user clicks the "generate password" button, they will be directed through a series of prompts which will ask them which password specifications they would like to include. 
 
