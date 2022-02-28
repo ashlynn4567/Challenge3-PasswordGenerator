@@ -130,19 +130,19 @@ function getPasswordSpecs() {
 function includePasswordType(allChar, userChar) {
   if (passwordType.lower === "Y" || passwordType.lower === "y") {
     console.log("Include lowercase");
-    newPassword = userChar.push(...allChar[0].slice(0));
+    newPassword = userChar.push(allChar[0]);
   };
   if (passwordType.upper === "Y" || passwordType.upper === "y") {
     console.log("Include uppercase");
-    newPassword = userChar.push(...allChar[1].slice(0));
+    newPassword = userChar.push(allChar[1]);
   };
   if (passwordType.number === "Y" || passwordType.number === "y") {
     console.log("Include numbers");
-    newPassword = userChar.push(...allChar[2].slice(0));
+    newPassword = userChar.push(allChar[2]);
   };
   if (passwordType.special === "Y" || passwordType.special === "y") {
     console.log("Include special");
-    newPassword = userChar.push(...allChar[3].slice(0));
+    newPassword = userChar.push(allChar[3]);
   };
   console.log(newPassword);
 };
@@ -161,7 +161,7 @@ function createPassword () {
 function generatePassword() {
   // convert the passwordType object values into an array
   var pickedType = Object.values(passwordType);
-  
+
   includePasswordType(charSet, pickedType);
   createPassword();
 };
