@@ -126,29 +126,43 @@ function getPasswordSpecs() {
 
 
 // 3. RANDOMLY GENERATING A PASSWORD CHARACTERS BASED ON USER INPUT----------------------------------------------------- //
-// //take into account which character types were selected
-// function includePasswordType(property) {  
-//   for (property in passwordType) {
-//     if (property === "Y" || property === "y") {
-//       console.log("Property " + i + " is YES.");
-//     } else {
-//       console.log("Property " + i + " is NO.");
-//     }
-//   };
-// };
+//take into account which character types were selected
+function includePasswordType(allChar, userChar) {
+  if (passwordType.lower === "Y" || passwordType.lower === "y") {
+    console.log("Include lowercase");
+    newPassword = userChar.push(...allChar[0].slice(0));
+  };
+  if (passwordType.upper === "Y" || passwordType.upper === "y") {
+    console.log("Include uppercase");
+    newPassword = userChar.push(...allChar[1].slice(0));
+  };
+  if (passwordType.number === "Y" || passwordType.number === "y") {
+    console.log("Include numbers");
+    newPassword = userChar.push(...allChar[2].slice(0));
+  };
+  if (passwordType.special === "Y" || passwordType.special === "y") {
+    console.log("Include special");
+    newPassword = userChar.push(...allChar[3].slice(0));
+  };
+  console.log(newPassword);
+};
 
-//use math.random to generate password
+// //use math.random to generate password
 function createPassword () {
   // until the number of characters = user input number of characters, add a randomly generated character
   for (i=0; i < passwordNumChars; i++) {
-    newPassword.push("insert" + Math.floor(Math.random() * passwordNumChars) + "array stuff");
+    newPassword += passwordType[Math.floor(Math.random() * passwordNumChars)];
     console.log(newPassword);
   };
+  return newPassword;
 };
 
 // run all password generation functions
-function generatePassword() {  
-  // includePasswordType(passwordType);
+function generatePassword() {
+  // convert the passwordType object values into an array
+  var pickedType = Object.values(passwordType);
+  
+  includePasswordType(charSet, pickedType);
   createPassword();
 };
 // END PASSWORD GENERATION SECTION-------------------------------------------------------------------------------------- //
