@@ -20,11 +20,11 @@ var passwordNumChars = {};
 // set a variable to track if the user has entered yes to at least one character type
 var oneType = false;
 
-// assign an empty variable to add random characters to 
-var newPassword = ""
+// assign an empty array for which to add randomly generated characters
+var newPassword = [];
 
 // Nested array for possible password characters
-var characterSet = [  
+var charSet = [  
   ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"], 
   ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"], 
   ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"], 
@@ -61,7 +61,6 @@ function getPasswordType() {
 
     includeCharacterType(passwordType.lower);
     errorMessage(passwordType.lower, lowerCaseLettersPrompt);
-    console.log(passwordType.lower);
 
     // uppercase? (yes or no)
     var upperCaseLettersPrompt = "Would you like to include uppercase letters? Type Y for YES or N for NO.";
@@ -69,7 +68,6 @@ function getPasswordType() {
 
     includeCharacterType(passwordType.upper);
     errorMessage(passwordType.upper, upperCaseLettersPrompt);
-    console.log(passwordType.upper);
 
     // numbers? (yes or no)
     var numbersPrompt = "Would you like to include numerical characters? Type Y for YES or N for NO.";
@@ -77,7 +75,6 @@ function getPasswordType() {
 
     includeCharacterType(passwordType.number);
     errorMessage(passwordType.number, numbersPrompt);
-    console.log(passwordType.number);
     
     // special characters? (yes or no)
     var specialPrompt = "Would you like to include special characters? Type Y for YES or N for NO.";
@@ -85,7 +82,6 @@ function getPasswordType() {
 
     includeCharacterType(passwordType.special);
     errorMessage(passwordType.special, specialPrompt);
-    console.log(passwordType.special);
 
     // alert user to enter at least one Y value if they haven't already done so
     if (oneType === false) {
@@ -113,7 +109,6 @@ function getPasswordNumChars() {
   };
 
   errorMessage(passwordNumChars, numCharsPrompt);
-  console.log(passwordNumChars);
 };
 
 // run all password specification functions
@@ -131,27 +126,30 @@ function getPasswordSpecs() {
 
 
 // 3. RANDOMLY GENERATING A PASSWORD CHARACTERS BASED ON USER INPUT----------------------------------------------------- //
-//take into account which character types were selected
-function includePasswordType() {  
-  for (i = 0; i < (passwordType.length + 1); i++) {
-    console.log("This is iteration #" + [i]);
-    // if (oneType) {
-    //   // include that property into array consideration
-    // };
-  };
-};
+// //take into account which character types were selected
+// function includePasswordType(property) {  
+//   for (property in passwordType) {
+//     if (property === "Y" || property === "y") {
+//       console.log("Property " + i + " is YES.");
+//     } else {
+//       console.log("Property " + i + " is NO.");
+//     }
+//   };
+// };
 
 //use math.random to generate password
-function selectRandomCharacters () {
+function createPassword () {
   // until the number of characters = user input number of characters, add a randomly generated character
   for (i=0; i < passwordNumChars; i++) {
+    newPassword.push("insert" + Math.floor(Math.random() * passwordNumChars) + "array stuff");
+    console.log(newPassword);
   };
 };
 
 // run all password generation functions
-function generatePassword() {
-  includePasswordType();
-  selectRandomCharacters();
+function generatePassword() {  
+  // includePasswordType(passwordType);
+  createPassword();
 };
 // END PASSWORD GENERATION SECTION-------------------------------------------------------------------------------------- //
 
