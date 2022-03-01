@@ -15,7 +15,7 @@
 var passwordType = {};
 
 // defining passwordNumChars object to hold user input values for number of characters
-var passwordNumChars = {};
+var passwordNumChars;
 
 // set a variable to track if the user has entered yes to at least one character type
 var oneType = false;
@@ -150,7 +150,7 @@ function includePasswordType() {
 function createPassword () {
   // until the number of characters = user input number of characters, add a randomly generated character
   for (i=0; i < passwordNumChars; i++) {
-    newPassword += newPasswordChars[Math.floor(Math.random() * passwordNumChars.length)];
+    newPassword += newPasswordChars[Math.floor(Math.random() * passwordNumChars)];
     console.log(newPassword);
   };
   return newPassword;
