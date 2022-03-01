@@ -20,9 +20,6 @@ var passwordNumChars = {};
 // set a variable to track if the user has entered yes to at least one character type
 var oneType = false;
 
-// assign an empty array for which to add randomly generated characters
-var newPassword = [];
-
 // Nested array for possible password characters
 var charSet = [  
   ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"], 
@@ -31,6 +28,12 @@ var charSet = [
   [" ", "!", '"', "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "\\", "]", 
   "^", "_", "`", "{", "|", "}", "~"]
 ];
+
+// assign an empty array for which to add user character set
+var newPasswordChars = [];
+
+// assign a variable to hold the generated password
+var newPassword = ""
 // END VARIABLE SECTION------------------------------------------------------------------------------------------------- //
 
 
@@ -127,31 +130,27 @@ function getPasswordSpecs() {
 
 // 3. RANDOMLY GENERATING A PASSWORD CHARACTERS BASED ON USER INPUT----------------------------------------------------- //
 //take into account which character types were selected
-function includePasswordType(allChar, userChar) {
+function includePasswordType() {
   if (passwordType.lower === "Y" || passwordType.lower === "y") {
-    console.log("Include lowercase");
-    newPassword = userChar.push(allChar[0]);
+    newPasswordChars.push(...charSet[0].slice(0));
   };
   if (passwordType.upper === "Y" || passwordType.upper === "y") {
-    console.log("Include uppercase");
-    newPassword = userChar.push(allChar[1]);
+    newPasswordChars.push(...charSet[1].slice(0));
   };
   if (passwordType.number === "Y" || passwordType.number === "y") {
-    console.log("Include numbers");
-    newPassword = userChar.push(allChar[2]);
+    newPasswordChars.push(...charSet[2].slice(0));
   };
   if (passwordType.special === "Y" || passwordType.special === "y") {
-    console.log("Include special");
-    newPassword = userChar.push(allChar[3]);
+    newPasswordChars.push(...charSet[3].slice(0));
   };
-  console.log(newPassword);
+  console.log(newPasswordChars);
 };
 
 // //use math.random to generate password
 function createPassword () {
   // until the number of characters = user input number of characters, add a randomly generated character
   for (i=0; i < passwordNumChars; i++) {
-    newPassword += passwordType[Math.floor(Math.random() * passwordNumChars)];
+    newPassword += newPasswordChars[Math.floor(Math.random() * passwordNumChars.length)];
     console.log(newPassword);
   };
   return newPassword;
@@ -159,11 +158,9 @@ function createPassword () {
 
 // run all password generation functions
 function generatePassword() {
-  // convert the passwordType object values into an array
-  var pickedType = Object.values(passwordType);
-
-  includePasswordType(charSet, pickedType);
+  includePasswordType();
   createPassword();
+  return newPassword;
 };
 // END PASSWORD GENERATION SECTION-------------------------------------------------------------------------------------- //
 
