@@ -106,7 +106,7 @@ function getPasswordNumChars() {
   };
   
   // while loop to display an error message if the user doesn't enter a number from 8 to 128 for numChars
-  while (passwordNumChars < 8 && passwordNumChars > 128) {
+  while (passwordNumChars < 8 || passwordNumChars > 128) {
     window.alert("You must enter a number from 8 to 128! Please try again.");
     passwordNumChars = parseInt(window.prompt(numCharsPrompt));
   };
