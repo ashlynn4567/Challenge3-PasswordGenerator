@@ -31,9 +31,6 @@ var charSet = [
 
 // assign an empty array for which to add user character set
 var newPasswordChars = [];
-
-// assign a variable to hold the generated password
-var newPassword = ""
 // END VARIABLE SECTION------------------------------------------------------------------------------------------------- //
 
 
@@ -57,6 +54,9 @@ function errorMessage(value, prompt) {
 
 // function asking user to input different types of character specifications
 function getPasswordType() {
+  // reset so that the password gen can be used more than once
+  oneType = false;
+  
   while (oneType === false) {
     // lowercase? (yes or no)
     var lowerCaseLettersPrompt = "Would you like to include lowercase letters? Type Y for YES or N for NO.";
@@ -120,8 +120,6 @@ function getPasswordSpecs() {
   getPasswordNumChars();
   console.log(passwordType);
   console.log(passwordNumChars);
-
-  generatePassword();
 };
 // END USER INPUT SECTION----------------------------------------------------------------------------------------------- //
 
@@ -130,7 +128,7 @@ function getPasswordSpecs() {
 
 // 3. RANDOMLY GENERATING A PASSWORD CHARACTERS BASED ON USER INPUT----------------------------------------------------- //
 //take into account which character types were selected
-function includePasswordType() {
+function includePasswordType() {  
   if (passwordType.lower === "Y" || passwordType.lower === "y") {
     newPasswordChars.push(...charSet[0].slice(0));
   };
@@ -148,11 +146,14 @@ function includePasswordType() {
 
 // //use math.random to generate password
 function createPassword () {
+  // assign a variable to hold the generated password
+  var newPassword = ""
+  
   // until the number of characters = user input number of characters, add a randomly generated character
   for (i=0; i < passwordNumChars; i++) {
-    newPassword += newPasswordChars[Math.floor(Math.random() * passwordNumChars)];
-    console.log(newPassword);
+    newPassword += newPasswordChars[Math.floor(Math.random() * (newPasswordChars.length - 1))];
   };
+  console.log(newPassword);
   return newPassword;
 };
 
@@ -160,7 +161,6 @@ function createPassword () {
 function generatePassword() {
   includePasswordType();
   createPassword();
-  return newPassword;
 };
 // END PASSWORD GENERATION SECTION-------------------------------------------------------------------------------------- //
 
@@ -168,9 +168,14 @@ function generatePassword() {
 
 
 // 4. WRITING PASSWORD ON THE PAGE FOR USER VIEW------------------------------------------------------------------------ //
+// run all password specification functions
+
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
+  getPasswordSpecs();
+  generatePassword();
+  var password = createPassword();
+  console.log(createPassword());
   var passwordText = document.querySelector("#password");
   passwordText.value = password;
 };
@@ -184,5 +189,5 @@ function writePassword() {
 var generateBtn = document.querySelector("#generate");
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", getPasswordSpecs);
+generateBtn.addEventListener("click", writePassword);
 // END CLICK EVENT LISTENER SECTION------------------------------------------------------------------------------------- //
