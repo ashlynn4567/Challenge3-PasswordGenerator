@@ -1,6 +1,6 @@
 # Password Generator
 
-## Introducing my third coding project.
+### Introducing my third coding project.
 
 This project is my first experience with building the behavior of a web application. I was given a task - to provide employees with access to sensitive data the ability to generate a high security and randomized password.
 
@@ -25,7 +25,7 @@ Once the user clicks the "generate password" button, they will be directed throu
 
 <p align="center"><img src="./assets/images/password-gen-gif.gif"/></p>
 
-## Try it for yourself!
+## Deployed Site
 
 <a href="https://ashlynn4567.github.io/Challenge3-PasswordGenerator/">Click here to generate a password!<a>
 
