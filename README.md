@@ -22,10 +22,16 @@ Follow [this link](https://ashlynn4567.github.io/Password-Generator/) to view an
 
 ## Features
 
+This is how the homepage appears to viewers. It is responsive, adapting to multiple screen sizes.
+
+<p align="center">
+<img alt="password-generator-screenshot.jpg" src="./assets/images/password-generator-screenshot.jpg"/>
+</p>
+
 Once the user clicks the "generate password" button, they will be directed through a series of window alert prompts which will ask them which password specifications they would like to include. Once the prompts have been completed, a randomized password will be dynamically created and added to the page.
 
 <p align="center">
-<img alt="password-generator-demo.gif" src="./assets/images/password-generator-demo.gif"/>
+<img alt="A demonstration gif showing how the user can navigate through each prompt to specify which character types they wish to include in their password generation." src="./assets/images/password-generator-demo.gif"/>
 </p>
 
 ## Technologies
