@@ -13,7 +13,7 @@
 
 ## Description
 
-This is my third challenge assignment for the University of Oregon Coding Bootcamp 2022. This application uses JavaScript to generate a unique password based on user-selected criteria. Users can choose if they want to include lowercase letters, uppercase letters, numerical characters, or special characters. They must choose at least one character type to include. Users can then also specify the length of the password generated, but the number of characters must be between 8 and 128.
+Password Generator is an application that uses JavaScript to generate a unique password based on user-selected criteria. Users can choose if they want to include lowercase letters, uppercase letters, numerical characters, or special characters. They must choose at least one character type to include. Users can then also specify the length of the password generated, but the number of characters must be between 8 and 128.
 
 ## Deployed Site
 
